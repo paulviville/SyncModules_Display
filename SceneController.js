@@ -61,20 +61,20 @@ export default class SceneController {
 		const gridHelper = new THREE.GridHelper( );
 		this.#scene.add( gridHelper );
 
-		const divs = 10;
-		const sphereGroup = new THREE.Group( );
-		const sphereGeometry = new THREE.SphereGeometry( 0.1, 16, 16 );
-		for ( let i = 0; i < divs; ++i ) {
-			for ( let j = 0; j < divs; ++j ) {
-				for ( let k = 0; k < divs; ++k ) {
-					const material = new THREE.MeshPhongMaterial( { color: new THREE.Color( i / divs, j / divs, k / divs) } );
-					const sphere = new THREE.Mesh( sphereGeometry, material)
-					sphereGroup.add( sphere );
-					sphere.position.set( -5 + ( 10 / divs ) *i, -5 + ( 10 / divs ) *j, -5 + ( 10 / divs ) *k )
-				} 
-			} 
-		}
-		this.#scene.add( sphereGroup );
+		// const divs = 10;
+		// const sphereGroup = new THREE.Group( );
+		// const sphereGeometry = new THREE.SphereGeometry( 0.1, 16, 16 );
+		// for ( let i = 0; i < divs; ++i ) {
+		// 	for ( let j = 0; j < divs; ++j ) {
+		// 		for ( let k = 0; k < divs; ++k ) {
+		// 			const material = new THREE.MeshPhongMaterial( { color: new THREE.Color( i / divs, j / divs, k / divs) } );
+		// 			const sphere = new THREE.Mesh( sphereGeometry, material)
+		// 			sphereGroup.add( sphere );
+		// 			sphere.position.set( -5 + ( 10 / divs ) *i, -5 + ( 10 / divs ) *j, -5 + ( 10 / divs ) *k )
+		// 		} 
+		// 	} 
+		// }
+		// this.#scene.add( sphereGroup );
 	}
 
 	#onWindowResize ( ) {

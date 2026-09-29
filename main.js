@@ -33,35 +33,85 @@ window.addEventListener("beforeunload", (event) => { clientManager.beforeUnload(
 
 
 
+// const displayGeometries = [
+// 	[
+// 		[ 0.5, -0.5, 1.5 ],
+// 		[ -0.5, -0.5, 1.5 ],
+// 		[ 0.5, 0.5, 1.5 ],
+// 		[ -0.5, 0.5, 1.5 ],
+// 	],
+// 	[
+// 		[ 0.5, 0.75, 1.5 ],
+// 		[ -0.5, 0.75, 1.5 ],
+// 		[ 0.5, 1.75, 1.0 ],
+// 		[ -0.5, 1.75, 1.0 ],
+// 	],
+// 	[
+// 		[ -0.75, -0.5, 1.5 ],
+// 		[ -1.75, -0.5, 1.0 ],
+// 		[ -0.75, 0.5, 1.5 ],
+// 		[ -1.75, 0.5, 1.0 ],
+// 	],
+// ]
+
+/// wilder
+// const displayGeometries = [
+// 	[
+// 		[ 2.95, 0.0, 0.0 ],
+// 		[ -2.95, 0.0, 0.0 ],
+// 		[ 2.95, 0.4, 0.0 ],
+// 		[ -2.95, 0.4, 0.0 ],
+// 	],
+// 	[
+// 		[ 2.95, 0.4, 0.0 ],
+// 		[ -2.95, 0.4, 0.0 ],
+// 		[ 2.95, 0.8, 0.0 ],
+// 		[ -2.95, 0.8, 0.0 ],
+// 	],
+// 	[
+// 		[ 2.95, 0.8, 0.0 ],
+// 		[ -2.95, 0.8, 0.0 ],
+// 		[ 2.95, 1.2, 0.0 ],
+// 		[ -2.95, 1.2, 0.0 ],
+// 	],
+// 	[
+// 		[ 2.95, 1.2, 0.0 ],
+// 		[ -2.95, 1.2, 0.0 ],
+// 		[ 2.95, 1.6, 0.0 ],
+// 		[ -2.95, 1.6, 0.0 ],
+// 	],
+// 	[
+// 		[ 2.95, 1.6, 0.0 ],
+// 		[ -2.95, 1.6, 0.0 ],
+// 		[ 2.95, 2.0, 0.0 ],
+// 		[ -2.95, 2.0, 0.0 ],
+// 	],
+// ]
+
 const displayGeometries = [
 	[
-		[ 0.5, -0.5, 1.5 ],
-		[ -0.5, -0.5, 1.5 ],
-		[ 0.5, 0.5, 1.5 ],
-		[ -0.5, 0.5, 1.5 ],
+		[ 2.95, 0.0, 0.0 ],
+		[ 0, 0.0, 0.0 ],
+		[ 2.95, 2.0, 0.0 ],
+		[ 0, 2.0, 0.0 ],
 	],
 	[
-		[ 0.5, 0.75, 1.5 ],
-		[ -0.5, 0.75, 1.5 ],
-		[ 0.5, 1.75, 1.0 ],
-		[ -0.5, 1.75, 1.0 ],
-	],
-	[
-		[ -0.75, -0.5, 1.5 ],
-		[ -1.75, -0.5, 1.0 ],
-		[ -0.75, 0.5, 1.5 ],
-		[ -1.75, 0.5, 1.0 ],
+		[ 0, 0, 0.0 ],
+		[ -2.95, 0, 0.0 ],
+		[ 0, 2, 0.0 ],
+		[ -2.95, 2, 0.0 ],
 	],
 ]
 
 
 
-let displayModule;
-let UUID;
-function setDisplay ( id = 0 ) {
-	if ( displayModule === undefined )
-		return;
 
+let displayModule;
+let displayView;
+let UUID;
+function setDisplay ( id ) {
+	if ( displayModule === undefined || id == -1 )
+		return;
 
 	displayModule.setOnChange( displayModule.commands.setMatrices, ( matrices ) => {
 		if ( matrices.UUID != windowUUID ) {
@@ -87,7 +137,8 @@ clientManager.modulesRegistry.setOnChange( "ADD_MODULE", ( moduleData ) => {
 	if( moduleData.type == "DisplaysModule" ) {
 		displayModule = clientManager.modulesRegistry.getModule( moduleData.UUID );
 
-
+		displayView = clientManager.viewsRegistry.getView( moduleData.UUID );
+		displayView.visible = false; 
 
 		setDisplay( windowId );
 	}
